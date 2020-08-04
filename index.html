@@ -14,39 +14,46 @@
   </head>
   <body>
     <div class="container">
-      <form>
+        <div class="row">
+            <div class="col-8">
+      <form class="form-group">
         <input
+        class="form-control"
           type="text"
           placeholder="Type a city"
           autocomplete="off"
           autofocus="on"
         />
-        <input type="submit" value="Search" />
-        <input type="submit" value="Current" />
-      </form>
+      </div>
+    <div class="col-2">
+        <input type="submit" class="btn btn-primary" value="Search" />
+        </div>
+        <div class="col-2">
+        <input type="submit" class="btn btn-primary" value="Current" />
+    </div>
+    </form>
       <div class="row">
-        <div class="col-4">
+        <div class="col-3">
           31 °C | °F
         </div>
-        <div class="col-4">
-          New York
-          <br />
-          Sunday 12:00
-          <br />
+        <div class="col-6">
+        <ul>
+        <li id="city">
+          <strong> New York </strong>
+        </li>
+        <li id="date">
+        Sunday 12:00
+        </li>
+        <li id=description>
           Sunny
+        </li>
+        </ul>
         </div>
-        <div class="col-4">
+        <div class="col-3" id=sun-image>
           <img src="https://ssl.gstatic.com/onebox/weather/48/sunny.png" />
         </div>
       </div>
-    <div class="row">
-        <div class="col-6">
-            Humidity: 67%
-        </div>
-        <div class="col-6">
-            Wind: 4 Km/h
-        </div>
-    </div>
+     </div>
   </body>
   <script src="src/script.js"></script>
 </html>
