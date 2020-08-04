@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forcast</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <input
+          type="text"
+          placeholder="Type a city"
+          autocomplete="off"
+          autofocus="on"
+        />
+        <input type="submit" value="Search" />
+        <input type="submit" value="Current" />
+      </form>
+      <div class="row">
+        <div class="col-4">
+          31 °C | °F
+        </div>
+        <div class="col-4">
+          New York
+          <br />
+          Sunday 12:00
+          <br />
+          Sunny
+        </div>
+        <div class="col-4">
+          <img src="https://ssl.gstatic.com/onebox/weather/48/sunny.png" />
+        </div>
+      </div>
+    <div class="row">
+        <div class="col-6">
+            Humidity: 67%
+        </div>
+        <div class="col-6">
+            Wind: 4 Km/h
+        </div>
+    </div>
+  </body>
+  <script src="src/script.js"></script>
+</html>
