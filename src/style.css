@@ -1,18 +1,44 @@
 body {
+  font-family: "Chilanka", cursive;
   max-width: 600px;
   border: 1px solid #dfe1e5;
-  padding: 20px;
+  padding-top: 15px;
   margin: 20px;
 }
-
+#current {
+  margin-left: -10px;
+}
 ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
 #city {
-  font-size: 30px;
+  font-size: 33px;
+  letter-spacing: 1px;
 }
+
+#temperature strong {
+  font-size: 50px;
+}
+
+#temperature {
+  display: block;
+  margin: auto;
+  text-align: right;
+}
+
+#date {
+  font-size: 20px;
+}
+
+#description {
+  font-size: 20px;
+}
+
 #sun-image {
-  text-align: left;
+  display: block;
+  margin: auto;
 }

@@ -10,50 +10,56 @@
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
       crossorigin="anonymous"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Chilanka&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
     <div class="container">
-        <div class="row">
-            <div class="col-8">
+      <div class="top-wrapper">
       <form class="form-group">
+        <div class="row">
+          <div class="col-8">
         <input
-        class="form-control"
+          id="search-bar"
+          class="form-control"
           type="text"
           placeholder="Type a city"
           autocomplete="off"
           autofocus="on"
         />
-      </div>
-    <div class="col-2">
+        </div>
+        <div class="col-2" id="search">
         <input type="submit" class="btn btn-primary" value="Search" />
         </div>
-        <div class="col-2">
+        <div class="col-2" id="current">
         <input type="submit" class="btn btn-primary" value="Current" />
-    </div>
-    </form>
+        </div>
+      </form>
+      </div>
+      <div class="middle-wrapper">
       <div class="row">
-        <div class="col-3">
-          31 °C | °F
+        <div class="col-3" id="temperature">
+          <strong>31</strong>°C|°F
         </div>
         <div class="col-6">
-        <ul>
-        <li id="city">
-          <strong> New York </strong>
-        </li>
-        <li id="date">
-        Sunday 12:00
-        </li>
-        <li id=description>
-          Sunny
-        </li>
-        </ul>
+          <ul>
+            <li id="city">
+              <strong> New York </strong>
+            </li>
+            <li id="date">
+              Sunday 12:00
+            </li>
+            <li id="description">
+              Sunny
+            </li>
+          </ul>
         </div>
-        <div class="col-3" id=sun-image>
-          <img src="https://ssl.gstatic.com/onebox/weather/48/sunny.png" />
+        <div class="col-3" id="sun-image">
+          <img src="https://ssl.gstatic.com/onebox/weather/48/sunny.png"/>
+        </div>
         </div>
       </div>
-     </div>
+    </div>
   </body>
   <script src="src/script.js"></script>
 </html>
