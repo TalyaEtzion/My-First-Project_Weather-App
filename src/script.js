@@ -38,6 +38,7 @@ function search(city) {
 }
 
 function showTemp(response) {
+  console.log(response);
   let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let humidityElement = document.querySelector("#humidity");
@@ -81,12 +82,6 @@ function displayCelsiusTemperature(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", displayCelsiusTemperature);
-
 function displayFahrenheitFeels(event) {
   event.preventDefault();
   let feelsLikeElement = document.querySelector("#feels-like");
@@ -103,12 +98,6 @@ function displayCelsiusFeels(event) {
   let feelsLikeElement = document.querySelector("#feels-like");
   feelsLikeElement.innerHTML = Math.round(celsiusFeelsTemperature);
 }
-
-let fahrenheitFeelsLink = document.querySelector("#fahrenheit-feels-link");
-fahrenheitFeelsLink.addEventListener("click", displayFahrenheitFeels);
-
-let celsiusFeelsLink = document.querySelector("#celsius-feels-link");
-celsiusFeelsLink.addEventListener("click", displayCelsiusFeels);
 
 function dispalyForecast(response) {
   let forecastElement = document.querySelector("#forecast");
@@ -146,25 +135,38 @@ function handleSubmit(event) {
   cityInputElement.value = cityInputElement.value.toUpperCase();
 }
 
-let form = document.querySelector(".form-group");
-form.addEventListener("submit", handleSubmit);
-
-let celsiusTemperature = null;
-search("Luzerne");
-
-function searchLocation(position) {
+function searchPosition(position) {
   let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showTemp);
+  let apiUrlCoords = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrlCoords).then(showTemp);
+
+  apiUrlCoords = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrlCoords).then(dispalyForecast);
 }
 
-function getCurrentLocation(event) {
+function getCurrentPosition(event) {
   event.preventDefault();
-  navigator.geolocation.getCurrentPosition(searchLocation);
+  navigator.geolocation.getCurrentPosition(searchPosition);
 }
 
 let currentButton = document.querySelector("#current-button");
-currentButton.addEventListener("click", getCurrentLocation);
+currentButton.addEventListener("click", getCurrentPosition);
 
-let searchForm = document.querySelector("#city-form");
+let searchForm = document.querySelector(".form-group");
 searchForm.addEventListener("submit", handleSubmit);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+let fahrenheitFeelsLink = document.querySelector("#fahrenheit-feels-link");
+fahrenheitFeelsLink.addEventListener("click", displayFahrenheitFeels);
+
+let celsiusFeelsLink = document.querySelector("#celsius-feels-link");
+celsiusFeelsLink.addEventListener("click", displayCelsiusFeels);
+
+search("Lucerne");
+
+let celsiusTemperature = null;
