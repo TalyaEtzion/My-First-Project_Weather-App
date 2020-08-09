@@ -42,7 +42,11 @@
       <div class="middle-wrapper">
       <div class="row">
         <div class="col-3" id="temp-info">
-          <span id="temperature">31</span><span class="units">°C|°F</span>
+          <span id="temperature"></span>
+          <span class="units">
+          <a href="#" id="celsius-link" class="active">°C</a> |
+          <a href="#" id="fahrenheit-link">°F</a>
+        </span>
         </div>
         <div class="col-6">
           <ul>
@@ -51,8 +55,7 @@
             <li id="description"></li>
           </ul>
         </div>
-         
-        <div class="col-3">
+          <div class="col-3">
           <img src="" alt="Clear" id="icon">
         </div>
         </div>
@@ -60,7 +63,9 @@
       <div class="additional-information">
       <div class="row">
         <div class="col-4">
-          <i class="fas fa-tshirt"></i> Feels-like: <span id="feels-like"></span>°C
+          <i class="fas fa-tshirt"></i> Feels-like: <span id="feels-like"></span>
+          <span class="units">
+            <a href="#" id="celsius-feels-link" class="active">°C</a> | <a href="#" id="fahrenheit-feels-link">°F</a>
         </div>
         <div class="col-4">
           <i class="fas fa-tint"></i> Humidity: <span id="humidity"></span>%

@@ -27,7 +27,7 @@ function search(city) {
 }
 
 function showTemp(response) {
-  let tempInput = document.querySelector("#temperature");
+  let temperatureElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
@@ -36,8 +36,9 @@ function showTemp(response) {
   let iconElement = document.querySelector("#icon");
 
   celsiusTemperature = response.data.main.temp;
+  celsiusFeelsTemperature = response.data.main.feels_like;
 
-  tempInput.innerHTML = Math.round(celsiusTemperature);
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
   humidityElement.innerHTML = response.data.main.humidity;
   windElement.innerHTML = Math.round(response.data.wind.speed);
@@ -50,10 +51,58 @@ function showTemp(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+function displayFahrenheitFeels(event) {
+  event.preventDefault();
+  let feelsLikeElement = document.querySelector("#feels-like");
+  celsiusFeelsLink.classList.remove("active");
+  fahrenheitFeelsLink.classList.add("active");
+  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  feelsLikeElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+
+function displayCelsiusFeels(event) {
+  event.preventDefault();
+  celsiusFeelsLink.classList.add("active");
+  fahrenheitFeelsLink.classList.remove("active");
+  let feelsLikeElement = document.querySelector("#feels-like");
+  feelsLikeElement.innerHTML = Math.round(celsiusFeelsTemperature);
+}
+
+let fahrenheitFeelsLink = document.querySelector("#fahrenheit-feels-link");
+fahrenheitFeelsLink.addEventListener("click", displayFahrenheitFeels);
+
+let celsiusFeelsLink = document.querySelector("#celsius-feels-link");
+celsiusFeelsLink.addEventListener("click", displayCelsiusFeels);
+
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#search-bar");
   search(cityInputElement.value);
+  cityInputElement.value = cityInputElement.value.trim();
+  cityInputElement.value = cityInputElement.value.toUpperCase();
 
   if (cityInputElement.value) {
     cityInputElement.innerHTML = `${cityInputElement.value}`;
@@ -67,4 +116,4 @@ let form = document.querySelector(".form-group");
 form.addEventListener("submit", handleSubmit);
 
 let celsiusTemperature = null;
-search("Lucerne");
+search("Luzerne");
