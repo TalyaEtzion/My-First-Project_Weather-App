@@ -65,40 +65,6 @@ function showTemp(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
-function displayFahrenheitTemperature(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
-}
-
-function displayCelsiusTemperature(event) {
-  event.preventDefault();
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-function displayFahrenheitFeels(event) {
-  event.preventDefault();
-  let feelsLikeElement = document.querySelector("#feels-like");
-  celsiusFeelsLink.classList.remove("active");
-  fahrenheitFeelsLink.classList.add("active");
-  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
-  feelsLikeElement.innerHTML = Math.round(fahrenheiTemperature);
-}
-
-function displayCelsiusFeels(event) {
-  event.preventDefault();
-  celsiusFeelsLink.classList.add("active");
-  fahrenheitFeelsLink.classList.remove("active");
-  let feelsLikeElement = document.querySelector("#feels-like");
-  feelsLikeElement.innerHTML = Math.round(celsiusFeelsTemperature);
-}
-
 function dispalyForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = null;
@@ -133,6 +99,40 @@ function handleSubmit(event) {
   search(cityInputElement.value);
   cityInputElement.value = cityInputElement.value.trim();
   cityInputElement.value = cityInputElement.value.toUpperCase();
+}
+
+function displayFahrenheitTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+
+function displayCelsiusTemperature(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+function displayFahrenheitFeels(event) {
+  event.preventDefault();
+  let feelsLikeElement = document.querySelector("#feels-like");
+  celsiusFeelsLink.classList.remove("active");
+  fahrenheitFeelsLink.classList.add("active");
+  let fahrenheiTemperature = (celsiusTemperature * 9) / 5 + 32;
+  feelsLikeElement.innerHTML = Math.round(fahrenheiTemperature);
+}
+
+function displayCelsiusFeels(event) {
+  event.preventDefault();
+  celsiusFeelsLink.classList.add("active");
+  fahrenheitFeelsLink.classList.remove("active");
+  let feelsLikeElement = document.querySelector("#feels-like");
+  feelsLikeElement.innerHTML = Math.round(celsiusFeelsTemperature);
 }
 
 function searchPosition(position) {

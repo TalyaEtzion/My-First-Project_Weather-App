@@ -18,7 +18,27 @@ body {
 }
 #current-button {
   margin-left: -10px;
+  background: #bfdeff;
+  color: #0062cc;
+  font-weight: bold;
 }
+
+#current-button:hover {
+  background: #0062cc;
+  color: #ffff;
+}
+
+#search-button {
+  background: #bfdeff;
+  color: #0062cc;
+  font-weight: bold;
+}
+
+#search-button:hover {
+  background: #0062cc;
+  color: #ffff;
+}
+
 ul {
   list-style: none;
   margin: 0;
