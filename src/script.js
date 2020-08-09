@@ -136,15 +136,15 @@ function displayCelsiusFeels(event) {
 }
 
 function searchPosition(position) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiKey = "4244207618e94ad6ef8d06296ce334b6";
   let apiUrlCoords = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
   axios.get(apiUrlCoords).then(showTemp);
 
-  apiUrlCoords = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  apiUrlCoords = `https://api.openweathermap.org/data/2.5/forecast/?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
   axios.get(apiUrlCoords).then(dispalyForecast);
 }
 
-function getCurrentPosition(event) {
+https: function getCurrentPosition(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchPosition);
 }
