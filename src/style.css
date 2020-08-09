@@ -27,11 +27,11 @@ ul {
   font-weight: bold;
 }
 
-#temperature strong {
+#temperature {
   font-size: 50px;
 }
 
-#temperature {
+#temp-info {
   display: block;
   margin: auto;
   text-align: right;
@@ -45,7 +45,8 @@ ul {
   font-size: 20px;
 }
 
-#sun-image {
+#icon {
   display: block;
-  margin: auto;
+  margin: 0;
+  padding: 0;
 }

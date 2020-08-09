@@ -20,18 +20,49 @@ let day = days[now.getDay()];
 let date = document.querySelector("#date");
 date.innerHTML = `${day} ${hour}:${minutes}`;
 
-function search(event) {
-  event.preventDefault();
-  let searchInput = document.querySelector("#search-bar");
-  let cityName = document.querySelector("#city");
+function search(city) {
+  let apiKey = "4244207618e94ad6ef8d06296ce334b6";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showTemp);
+}
 
-  if (searchInput.value) {
-    cityName.innerHTML = `${searchInput.value}`;
+function showTemp(response) {
+  let tempInput = document.querySelector("#temperature");
+  let cityElement = document.querySelector("#city");
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
+  let descriptionElement = document.querySelector("#description");
+  let iconElement = document.querySelector("#icon");
+
+  celsiusTemperature = response.data.main.temp;
+
+  tempInput.innerHTML = Math.round(celsiusTemperature);
+  cityElement.innerHTML = response.data.name;
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+  descriptionElement.innerHTML = response.data.weather[0].description;
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#search-bar");
+  search(cityInputElement.value);
+
+  if (cityInputElement.value) {
+    cityInputElement.innerHTML = `${cityInputElement.value}`;
   } else {
-    cityName.innerHTML = null;
+    cityInputElement.innerHTML = null;
     alert("Please type a city");
   }
 }
 
-let searchCity = document.querySelector(".form-group");
-searchCity.addEventListener("submit", search);
+let form = document.querySelector(".form-group");
+form.addEventListener("submit", handleSubmit);
+
+let celsiusTemperature = null;
+search("Lucerne");
