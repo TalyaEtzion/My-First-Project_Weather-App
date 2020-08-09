@@ -1,29 +1,40 @@
-let now = new Date();
-let hour = now.getHours();
-if (hour < 10) {
-  hours = `0${hour}`;
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let day = days[date.getDay()];
+  return `${day} ${formatHours(timestamp)}`;
 }
-let minutes = now.getMinutes();
-if (minutes < 10) {
-  minutes = `0${minutes}`;
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hours}:${minutes}`;
 }
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let day = days[now.getDay()];
-let date = document.querySelector("#date");
-date.innerHTML = `${day} ${hour}:${minutes}`;
 
 function search(city) {
   let apiKey = "4244207618e94ad6ef8d06296ce334b6";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemp);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(dispalyForecast);
 }
 
 function showTemp(response) {
@@ -33,6 +44,7 @@ function showTemp(response) {
   let windElement = document.querySelector("#wind");
   let descriptionElement = document.querySelector("#description");
   let feelsLikeElement = document.querySelector("#feels-like");
+  let dateElement = document.querySelector("#date");
   let iconElement = document.querySelector("#icon");
 
   celsiusTemperature = response.data.main.temp;
@@ -44,6 +56,7 @@ function showTemp(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   descriptionElement.innerHTML = response.data.weather[0].description;
   feelsLikeElement.innerHTML = Math.round(response.data.main.feels_like);
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
   iconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -97,19 +110,40 @@ fahrenheitFeelsLink.addEventListener("click", displayFahrenheitFeels);
 let celsiusFeelsLink = document.querySelector("#celsius-feels-link");
 celsiusFeelsLink.addEventListener("click", displayCelsiusFeels);
 
+function dispalyForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+
+  for (let index = 0; index < 6; index++) {
+    forecast = response.data.list[index];
+    forecastElement.innerHTML += `
+    <div class="col-2">
+      <h3>
+        ${formatHours(forecast.dt * 1000)}
+      </h3>
+      <img
+        src="http://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png"
+      />
+      <div class="weather-forecast-temperature">
+        <strong>
+          ${Math.round(forecast.main.temp_max)}°
+        </strong>
+        ${Math.round(forecast.main.temp_min)}°
+      </div>
+    </div>
+  `;
+  }
+}
+
 function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#search-bar");
   search(cityInputElement.value);
   cityInputElement.value = cityInputElement.value.trim();
   cityInputElement.value = cityInputElement.value.toUpperCase();
-
-  if (cityInputElement.value) {
-    cityInputElement.innerHTML = `${cityInputElement.value}`;
-  } else {
-    cityInputElement.innerHTML = null;
-    alert("Please type a city");
-  }
 }
 
 let form = document.querySelector(".form-group");
@@ -117,3 +151,20 @@ form.addEventListener("submit", handleSubmit);
 
 let celsiusTemperature = null;
 search("Luzerne");
+
+function searchLocation(position) {
+  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showTemp);
+}
+
+function getCurrentLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+let currentButton = document.querySelector("#current-button");
+currentButton.addEventListener("click", getCurrentLocation);
+
+let searchForm = document.querySelector("#city-form");
+searchForm.addEventListener("submit", handleSubmit);
