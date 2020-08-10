@@ -97,7 +97,6 @@ function handleSubmit(event) {
   let cityInputElement = document.querySelector("#search-bar");
   search(cityInputElement.value);
   cityInputElement.value = cityInputElement.value.trim();
-  cityInputElement.value = cityInputElement.value.toUpperCase();
 }
 
 function displayFahrenheitTemperature(event) {
